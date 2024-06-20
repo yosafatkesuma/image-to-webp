@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/image-to-webp/static/css/main.fc5c2c69.css",
+    "main.js": "/image-to-webp/static/js/main.c8036928.js",
+    "index.html": "/image-to-webp/index.html",
+    "main.fc5c2c69.css.map": "/image-to-webp/static/css/main.fc5c2c69.css.map",
+    "main.c8036928.js.map": "/image-to-webp/static/js/main.c8036928.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc5c2c69.css",
+    "static/js/main.c8036928.js"
+  ]
+}
