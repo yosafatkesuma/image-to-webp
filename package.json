@@ -12,6 +12,7 @@
     "svg"
   ],
   "author": "Yosafat Kesuma (da005kage@gmail.com)",
+  "homepage": "https://yosafatkesuma.github.io/image-to-webp",
   "dependencies": {
     "@stitches/react": "1.2.8",
     "classnames": "2.3.1",
