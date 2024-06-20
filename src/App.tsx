@@ -14,7 +14,6 @@ export default function App() {
   ) => {
     setError("");
     const imageFiles = event.target.files as FileList;
-    console.log(imageFiles);
 
     try {
       const result = await Promise.all(
@@ -23,17 +22,10 @@ export default function App() {
           return { webpBlob: resWebpfy.webpBlob, fileName: resWebpfy.fileName };
         })
       );
-      // const result = await Promise.all(
-      //   Object.keys()
-      //   imageFiles.map(async (file) => {
-      //     const result = await webpfy({ image: file });
-      //     return { webpBlob: result.webpBlob, fileName: result.fileName };
-      //   })
-      // );
-      console.log(result);
       setFiles((prev) => prev.concat(result));
     } catch (error) {
       console.error("Image conversion error:", error);
+      setError(error?.toString());
     }
   };
 
@@ -79,6 +71,18 @@ export default function App() {
               <a
                 href={URL.createObjectURL(file.webpBlob)}
                 download={file.fileName}
+                style={{
+                  backgroundColor: "#099CFF",
+                  borderRadius: 8,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                  padding: 8,
+                  height: "fit-content",
+                  color: "white",
+                  textDecoration: "none",
+                  cursor: 'pointer'
+                }}
               >
                 Download
               </a>
