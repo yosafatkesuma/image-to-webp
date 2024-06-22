@@ -13,6 +13,7 @@ export default function App() {
     event
   ) => {
     setError("");
+    setLoading(true);
     const imageFiles = event.target.files as FileList;
 
     try {
@@ -26,6 +27,8 @@ export default function App() {
     } catch (error) {
       console.error("Image conversion error:", error);
       setError(error?.toString());
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,21 +36,61 @@ export default function App() {
     <div className="App">
       <h1>Image convert to webp</h1>
       {!!error && <p>{error}</p>}
-      <div style={{ gap: 8, display: "flex" }}>
+      <div
+        style={{
+          gap: 8,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <button
+            onClick={() => {
+              setFiles([]);
+            }}
+          >
+            Clear
+          </button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileUpload}
+            multiple
+          />
+        </div>
         <button
+          style={{
+            backgroundColor: "#099CFF",
+            borderRadius: 8,
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+            padding: 8,
+            height: "fit-content",
+            color: "white",
+            textDecoration: "none",
+            cursor: "pointer",
+            borderColor: "transparent",
+          }}
           onClick={() => {
-            setFiles([]);
+            files.map((file) => {
+              var a = document.createElement("a") as any;
+              document.body.appendChild(a);
+              a.style = "display: none";
+              var csvUrl = URL.createObjectURL(file.webpBlob);
+              a.href = csvUrl;
+              a.download = file.fileName;
+              a.click();
+              URL.revokeObjectURL(a.href);
+              a.remove();
+            });
           }}
         >
-          Clear
+          Download All
         </button>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-          multiple
-        />
       </div>
+      {loading && <span>Loading ...</span>}
       <div style={{ display: "flex", flexDirection: "column" }}>
         {!!files.length &&
           files.map((file) => (
@@ -81,7 +124,7 @@ export default function App() {
                   height: "fit-content",
                   color: "white",
                   textDecoration: "none",
-                  cursor: 'pointer'
+                  cursor: "pointer",
                 }}
               >
                 Download
